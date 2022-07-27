@@ -1,29 +1,26 @@
 #!/usr/bin/python3
-"""Defines a text-indentation function."""
+"""Function to print a line split into paragraphs"""
 
 
 def text_indentation(text):
-    """Print text with two new lines after each '.', '?', and ':'.
+    """Split the text into paragraphs
+
+    Paragraphs end at a ':', '.', or '?' character. After one is found, two
+    line breaks are added. Paragraphs don't start or end with spaces.
 
     Args:
-        text (string): The text to print.
-    Raises:
-        TypeError: If text is not a string.
+        text (str): text to split
+
     """
+
     if not isinstance(text, str):
-        raise TypeError("text must be a string")
-
-    c = 0
-    while c < len(text) and text[c] == ' ':
-        c += 1
-
-    while c < len(text):
-        print(text[c], end="")
-        if text[c] == "\n" or text[c] in ".?:":
-            if text[c] in ".?:":
-                print("\n")
-            c += 1
-            while c < len(text) and text[c] == ' ':
-                c += 1
-            continue
-        c += 1
+        raise TypeError('text must be a string')
+    paras = []
+    last = 0
+    for i, c in enumerate(text):
+        if c in '.:?':
+            paras.append(text[last:i+1].strip(' '))
+            last = i + 1
+    if last <= len(text):
+        paras.append(text[last:].strip(' '))
+    print('\n\n'.join(paras), end='')

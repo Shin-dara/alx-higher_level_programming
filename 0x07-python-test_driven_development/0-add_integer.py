@@ -1,17 +1,27 @@
 #!/usr/bin/python3
-"""Defines an integer addition function."""
+"""Function to add two integers"""
 
 
 def add_integer(a, b=98):
-    """Return the integer addition of a and b.
+    """Add two integers
 
-    Float arguments are typecasted to ints before addition is performed.
+    If a or b is a float, the fractional part is truncated before adding.
 
-    Raises:
-        TypeError: If either of a or b is a non-integer and non-float.
+    Args:
+        a (int or float): first operand
+        b (int or float: second operand
+
+    Returns:
+        int: a + b
+
     """
-    if ((not isinstance(a, int) and not isinstance(a, float))):
-        raise TypeError("a must be an integer")
-    if ((not isinstance(b, int) and not isinstance(b, float))):
-        raise TypeError("b must be an integer")
-    return (int(a) + int(b))
+
+    if isinstance(a, float):
+        a = int(a)
+    elif not isinstance(a, int):
+        raise TypeError('a must be an integer')
+    if isinstance(b, float):
+        b = int(b)
+    elif not isinstance(b, int):
+        raise TypeError('b must be an integer')
+    return a + b
